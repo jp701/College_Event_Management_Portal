@@ -1,0 +1,33 @@
+﻿@model CoreApplication2.Models.ClgEvent
+
+@{
+    ViewData["Title"] = "Event Details";
+    var photoPath = "~/images/" + (Model.PhotoPath ?? "event1.jpg");
+}
+
+<h2>Event Details</h2>
+<hr />
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>@Model.Title</h3>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top image" src="@photoPath" asp-append-version="true" />
+                <h6>Event ID: @Model.Id</h6>
+                <h6>Category: @Model.Category</h6>
+                <h6>Date: @Model.Date.ToString("dd/MM/yyyy")</h6>
+                <h6>Venue: @Model.Venue</h6>
+                <h6>Description:</h6>
+                <p class="card-text">@Model.Description</p>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-action="ViewEvents" class="btn btn-dark">Back</a>
+                <a asp-action="AddRegEvent" asp-route-id="@Model.Id" class="btn btn-primary">Register</a>
+                <a asp-action="ViewPrograms" asp-route-id="@Model.Id" class="btn btn-success">View Programs</a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<CoreApplication2.Models.ClgEvent>
+
+@{
+    ViewData["Title"] = "Get Event Report";
+}
+
+<h2>Event Report</h2>
+<br />
+
+@if (Model.Any())
+{
+    <div class="table-responsive" id="ptable">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        Photo
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Venue)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var photoPath = "~/images/" + (item.PhotoPath ?? "event1.jpg");
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            <img class="img-thumbnail" src="@photoPath" alt="Event Photo" height="110" width="110" asp-append-version="true" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Venue)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <button type="button" class="btn btn-primary" id="print">Print Report</button><br />
+}
+else
+{
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h6>No Event Available !!</h6>
+    </div>
+}
+<br />
+
+@* Print button *@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#print').click(function () {
+                window.print();
+            });
+        });
+    </script>
+}
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+

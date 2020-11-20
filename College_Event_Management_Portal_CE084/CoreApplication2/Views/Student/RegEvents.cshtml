@@ -1,0 +1,123 @@
+﻿@model IEnumerable<CoreApplication2.Models.RegEvent>
+
+@{
+    ViewData["Title"] = "Registered Events";
+}
+
+<h2>Registered Events</h2>
+<hr />
+<p>
+    <a asp-action="ViewEvents">Click to Join Event</a>
+</p>
+@if (ViewBag.Id != null)
+{
+    <div class="alert alert-success alert-dismissable fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Event Registration Cancelled !!</h4>
+        <p>You have cancelled registration for the event with ID: <b>@ViewBag.Id</b></p>
+    </div>
+}
+
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Venue)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Status)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Venue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Status)
+                    </td>
+                    <td>
+                        <a asp-action="RegEventDetails" asp-route-id="@item.Id">View Details</a> 
+                         @if(item.Event.Status == 0)
+                         {
+                            <a href = '#' id = 'cancel' data-toggle ='modal' data-target ='#myModal' > | Deregister </a >
+                         }
+                    </td>
+                    <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h6 class="modal-title">Are you sure you want to cancel registration?</h6>
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <a asp-action="DeleteRegEvent" asp-route-id="@item.Id" role="button" class="btn btn-success">Confirm</a>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+else
+{
+    <div class="alert alert-danger alert-dismissable fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Event Not Found !!</h4>
+        <p>Sorry, you have not registered for any event.</p>
+    </div>
+}
+
+@*script to confirm cancellation for the event *@
+@section ImageScripts{
+    <script>
+        $(document).ready(function () {
+            $("#cancel").click(function () {
+                $("#myModal").appendTo("body"); //to make sure modal doesn't fade under the background
+            });
+        });
+    </script>
+}
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>

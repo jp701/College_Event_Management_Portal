@@ -1,0 +1,19 @@
+﻿@model  Int32
+@{
+    ViewData["Title"] = "Event Not Found";
+}
+
+<div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading">Event Not Found !!</h4>
+    <p>Event Not Found with Id: @Model</p>
+    <hr />
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="ViewEvents" asp-controller="Admin">Back to List</a>
+    }
+    else
+    {
+        <a asp-action="ViewEvents" asp-controller="Student">Back to List</a>
+    }
+</div>
+

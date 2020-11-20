@@ -1,0 +1,119 @@
+﻿@model RegEvent
+@{
+    ViewData["Title"] = "Reg Event Details";
+    var photoPath = "~/images/" + (Model.Event.PhotoPath ?? "event1.jpg");
+}
+
+<h2>Registered Event Details</h2>
+<hr />
+
+@if (ViewBag.ErrorMsg != null)
+{
+    <div class="alert alert-warning alert-dismissable fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h5>@ViewBag.ErrorMsg</h5>
+    </div>
+}
+else
+{
+    <div class="alert alert-success alert-dismissable fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h5>@ViewBag.Success</h5>
+    </div>
+}
+<br />
+<div class="row">
+    <div class="col-sm-4">
+        <img class="img-responsive image" src="@photoPath" alt="Event Photo" asp-append-version="true" /><br /><br />
+        <button type="button" class="btn btn-danger" id="cancel" data-toggle="modal" data-target="#myModal">Cancel Registration</button>
+
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h6 class="modal-title">Are you sure you want to cancel registration?</h6>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <a asp-route-id="@Model.Id" asp-action="DeleteRegEvent"  role="button" class="btn btn-success">Confirm</a>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-8">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EventId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EventId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Event.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Title)
+            </dd>
+            <dt class="col-sm-2">
+                Event Date
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Event.Venue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Venue)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Event.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Status)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Event.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Event.Description)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+@*script to confirm cancellation for the event *@
+@section ImageScripts{
+    <script>
+        $(document).ready(function () {
+            $("#cancel").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
+}
+
+<br />
+<div>
+    <a asp-action="ViewEvents">Back To Upcoming Events</a> |
+    <a asp-action="RegEvents">Back To Registered Events</a>
+</div>

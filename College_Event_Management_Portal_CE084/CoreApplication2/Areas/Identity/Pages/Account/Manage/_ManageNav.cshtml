@@ -1,0 +1,26 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav nav-pills flex-column">
+    <li class="@ManageNavPages.IndexNavClass(ViewContext) nav-item"><a class="nav-link" asp-page="./Index">Profile</a></li>
+    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext) nav-item"><a class="nav-link" id="change-password" asp-page="./ChangePassword">Password</a></li>
+    @if (hasExternalLogins)
+    {
+        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext) nav-item"><a class="nav-link" id="external-login" asp-page="./ExternalLogins">External logins</a></li>
+    }
+    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext) nav-item"><a class="nav-link" asp-page="./Index">Two-factor authentication</a></li>
+    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext) nav-item"><a class="nav-link" asp-page="./PersonalData">Personal data</a></li>
+    <li class="nav-item">
+        @{
+            if (User.IsInRole("Admin"))
+            {
+                <a class="nav-link" asp-action="Index" asp-controller="Admin">Back to Home</a>
+            }
+            else
+            {
+                <a class="nav-link" asp-action="Index" asp-controller="Student">Back to Home</a>
+            }
+        }
+    </li>
+</ul>

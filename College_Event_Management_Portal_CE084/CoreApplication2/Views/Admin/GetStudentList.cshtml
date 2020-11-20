@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewData["Title"] = "View Students";
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
+        <h2 class="">Student List</h2>
+        <hr />
+        <div class="container-fluid">
+            @if (Model.Any())
+            {
+                <div class="table-responsive-sm">
+                    <table class="table-striped table-hover table-bordered w-75 ">
+                        <thead>
+                            <tr class="bg-dark text-light text-center">
+                                <th>Sr.No</th>
+                                <th>Student Name</th>
+                                <th>Email</th>
+                                <th>Contact No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+                                @if (!user.UserName.Equals("user1@gmail.com"))
+                                {
+                                    <tr>
+                                        <td class="text-center">@(++ViewBag.count)</td>
+                                        <td>@user.FirstName @user.LastName</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.PhoneNumber</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <h3>No Student exists..</h3>
+            }
+
+        </div>
+        <br /><br />
+        Total Student Count = @(@Model.Count() - 1)  @*Because 1 user is Admin*@
+    </body>
+</html>
+
+

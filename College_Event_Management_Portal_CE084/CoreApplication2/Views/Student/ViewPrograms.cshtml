@@ -1,0 +1,67 @@
+﻿@model IEnumerable<EventProgram>
+@{
+    ViewData["Title"] = "View Programs";
+}
+
+<h2>View Programs</h2>
+<hr />
+
+
+
+@if (Model.Any())
+{
+    <h5>Event Id: @ViewBag.EId</h5>
+    <h5>Event Name: @ViewBag.ETitle</h5>
+    <br />
+    <h4 class="blue">Event Program Details</h4>
+    <div class="table-responsive-sm">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Program Id</th>
+                    <th>Name</th>
+                    <th>Program Type</th>
+                    <th>Venue</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Venue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Program Not Found !!</h4>
+        <p>No Program Found for Event With Id: @ViewBag.EId</p>
+    </div>
+}
+<br />
+<div>
+    <a asp-action="ViewEvents">Back to Event List</a>
+</div>

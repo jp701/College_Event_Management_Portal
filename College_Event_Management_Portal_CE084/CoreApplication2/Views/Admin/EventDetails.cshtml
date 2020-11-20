@@ -1,0 +1,44 @@
+﻿@model CoreApplication2.Models.ClgEvent
+
+@{
+    ViewData["Title"] = "Event Details";
+    var photoPath = "~/images/" + (Model.PhotoPath ?? "event1.jpg");
+
+}
+
+<h2>Event Details</h2>
+<hr />
+
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-success alert-dismissable fade show w-75 mx-auto" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="alert-heading">@ViewBag.Msg</h5>
+    </div>
+}
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>@Model.Title</h3>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top image" src="@photoPath" asp-append-version="true" />
+                <h6>Event ID: @Model.Id</h6>
+                <h6>Category: @Model.Category</h6>
+                <h6>Date: @Model.Date.ToString("dd/MM/yyyy")</h6>
+                <h6>Venue: @Model.Venue</h6>
+                <h6>Status: @Model.Status</h6>
+                <h6>Description:</h6>
+                <p class="card-text">@Model.Description</p>
+            </div>
+            <div class="card-footer text-center">
+                <a asp-action="ViewEvents" class="btn btn-dark">Back</a>
+                <a asp-action="UpdateEvent" asp-route-id="@Model.Id" class="btn btn-primary">Update</a>
+                <a asp-action="DeleteEvent" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

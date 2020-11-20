@@ -1,0 +1,67 @@
+﻿@model CoreApplication2.Models.EventProgram
+
+@{
+    ViewData["Title"] = "Add Program";
+}
+
+<h2>Add Event Program</h2>
+<hr />
+
+<form asp-action="AddProgram" method="post">
+    <div class="form-group row">
+        <label asp-for="Title" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Type" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="Type" class="form-control" asp-items="Html.GetEnumSelectList<Cate>()">
+                <option value=" ">Please Select</option>
+            </select>
+            <span asp-validation-for="Type" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Venue" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Venue" class="form-control" />
+            <span asp-validation-for="Venue" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="StartTime" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="StartTime" class="form-control" />
+            <span asp-validation-for="StartTime" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="EndTime" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="EndTime" class="form-control" />
+            <span asp-validation-for="EndTime" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="EventId" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <select asp-for="EventId" class="form-control" asp-items="ViewBag.EventId">
+                <option value="">Select an Event</option>
+            </select>
+            <span asp-validation-for="EventId" class="text-danger"></span>
+        </div>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="col-sm-10">
+        <div class="form-group row">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+<div>
+    <a asp-action="ViewPrograms">Back to List</a>
+</div>
+

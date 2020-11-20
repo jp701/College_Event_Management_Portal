@@ -1,0 +1,84 @@
+﻿@model CoreApplication2.Models.EventProgram
+
+@{
+    ViewData["Title"] = "Program Details";
+}
+
+<h2>Program Details</h2>
+<hr />
+
+@if (ViewBag.Msg != null)
+{
+    <div class="alert alert-success alert-dismissable fade show w-75" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="alert-heading">@ViewBag.Msg</h5>
+    </div>
+}
+
+@if (ViewBag.ErrorMsg == null)
+{
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Program Id
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Venue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Venue)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ClgEvent)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ClgEvent.Title)
+                [ID: @Html.DisplayFor(model => model.ClgEvent.Id)]
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="UpdateProgram" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="DeleteProgram" asp-route-id="@Model.Id">Delete</a> |
+        <a asp-action="ViewPrograms">Back to List</a>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Program Not Found !!</h4>
+        <p>@ViewBag.ErrorMsg</p>
+        <hr />
+        <a asp-action="ViewPrograms">Back to List</a>
+    </div>
+}
+

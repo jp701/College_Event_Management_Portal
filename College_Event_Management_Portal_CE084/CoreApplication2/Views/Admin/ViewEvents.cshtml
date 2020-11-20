@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ClgEvent>
+@{
+    ViewData["Title"] = "View Events";
+}
+
+<h2>All Available Events</h2>
+<hr />
+<p>
+    <a asp-action="AddEvent">Add New Event</a>
+</p>
+<div class="card-deck">
+    @foreach (var evnt in Model)
+    {
+        @if (evnt.Status==0) //Display Events with New status only
+        {
+            var photoPath = "~/images/" + (evnt.PhotoPath ?? "event1.jpg");
+            <div class="card-deck m-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4>@evnt.Title</h4>
+                    </div>
+                    <img class="card-img-top image" src="@photoPath" asp-append-version="true" />
+                    <div class="card-footer text-center">
+                        <a asp-action="EventDetails" asp-route-id="@evnt.Id" class="btn btn-dark m-1">View</a>
+                        <a asp-action="UpdateEvent" asp-route-id="@evnt.Id" class="btn btn-primary m-1">Update</a>
+                        <a asp-action="DeleteEvent" asp-route-id="@evnt.Id" class="btn btn-danger m-1">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>

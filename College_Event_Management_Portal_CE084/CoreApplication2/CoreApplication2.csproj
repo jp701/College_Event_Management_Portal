@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-CoreApplication2-9E61823D-0933-4E2D-9A3E-B94FFE3648FB</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20201111180708_identity.cs" />
+    <Compile Remove="Data\Migrations\20201111180708_identity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201113060224_identity.cs" />
+    <Compile Remove="Data\Migrations\20201113060224_identity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201113120614_customize-identity.cs" />
+    <Compile Remove="Data\Migrations\20201113120614_customize-identity.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201114051501_clgevent.cs" />
+    <Compile Remove="Data\Migrations\20201114051501_clgevent.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201116142616_validate-event-date.cs" />
+    <Compile Remove="Data\Migrations\20201116142616_validate-event-date.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201117085656_regevents.cs" />
+    <Compile Remove="Data\Migrations\20201117085656_regevents.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201117091057_regevents.cs" />
+    <Compile Remove="Data\Migrations\20201117091057_regevents.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201117091410_regevents.cs" />
+    <Compile Remove="Data\Migrations\20201117091410_regevents.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+</Project>
